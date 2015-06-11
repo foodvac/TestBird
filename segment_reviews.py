@@ -1,6 +1,3 @@
-import sys
-import os
-import pdb
 import nltk
 
 from lib.dbconnect import ConnectDB
