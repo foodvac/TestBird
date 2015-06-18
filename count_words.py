@@ -1,4 +1,4 @@
-input_file = 'C:/Users/Patrick/Downloads/spider_google_play/clean_output.txt'
+input_file = 'C:/Users/Patrick/Downloads/spider_google_play/wrong_results.txt'
 output = 'C:/Users/Patrick/Downloads/spider_google_play/wordfreq.txt'
 
 if __name__ == '__main__':
