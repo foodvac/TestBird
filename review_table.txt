@@ -1,0 +1,19 @@
+-- Table: review_table
+
+-- DROP TABLE review_table;
+
+CREATE TABLE review_table
+(
+  appid text,
+  appname text,
+  username text,
+  date_posted text,
+  score text,
+  review_title text,
+  review_content text
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE review_table
+  OWNER TO postgres;
