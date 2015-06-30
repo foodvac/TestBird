@@ -2,7 +2,7 @@
 # WORD P(pos|word) P(neg|word)
 # for each WORD that appears n or more times
 
-input_file = 'C:/Users/Patrick/Downloads/spider_google_play/clean_out.txt'
+input_file = 'C:/Users/Patrick/Downloads/spider_google_play/tokenized.txt'
 output_file = 'C:/Users/Patrick/Downloads/spider_google_play/out_probabilities.txt'
 test_output = 'C:/Users/Patrick/Downloads/spider_google_play/test_output.txt'
 SEPARATOR = '\001'
@@ -44,7 +44,7 @@ if __name__ == '__main__':
             pos_rev += 1
         total += 1
         words.pop(0)
-        words = list(set(words))
+        #words = list(set(words))
         for word in words:
             word = word.strip()
             if word == '\n' or word == '':
@@ -90,14 +90,29 @@ if __name__ == '__main__':
         pos_occ = phrases[phrase][0]
         neg_occ = phrases[phrase][1]
 
-        pos_prob = (pos_occ / pos_rev)# * p_pos_rev / \
+        pos_prob = (pos_occ / pos_words)  # * p_pos_rev / \
                    #((pos_occ + neg_occ) / (pos_rev + neg_rev))
-        neg_prob = (neg_occ / neg_rev)# * p_neg_rev / \
+        neg_prob = (neg_occ / neg_words) # * p_neg_rev / \
                    #((pos_occ + neg_occ) / (pos_rev + neg_rev))
         if pos_prob == 0 or neg_prob == 0:
             continue
+        if pos_prob > neg_prob:
+            if pos_prob / neg_prob <= 1.15:
+                continue
+            # elif pos_prob / neg_prob >= 15.0:
+            #     continue
+        else:
+            if neg_prob / pos_prob <= 1.15:
+                continue
+            # elif neg_prob / pos_prob >= 15.0:
+            #     continue
         probs.write(phrase + SEPARATOR + str(pos_prob) + SEPARATOR + str(neg_prob) + '\n' )
 
     probs.close()
     reviews.close()
     test.close()
+
+# 1.10: 0.839055793991
+# 1.15: 0.839239730227
+
+# 15.0: 0.839239730227

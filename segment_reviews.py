@@ -1,5 +1,5 @@
 # chunks reviews by pattern defined in grammar
-
+import spell_check
 import nltk
 import random
 from lib.dbconnect import ConnectDB
@@ -10,6 +10,7 @@ def get_reviews():
     conn = ConnectDB(conn_cfg='cfg/db.cfg', db='appdb', dbtype='postgresql')
     conn.cursor.execute("SELECT score, review_content FROM review_table;")
     reviews = conn.cursor.fetchall()
+
     random.shuffle(reviews)
     grammar = "NP: {<DT>?<JJ>*<NN>}" # pattern
     cp = nltk.RegexpParser(grammar)
@@ -39,10 +40,8 @@ def get_reviews():
                 a.write(str(score) + SEPARATOR)
             for sentence in sentences:
                 tokens = nltk.word_tokenize(sentence)
-                tmp = []
-                for token in tokens:
-                    tmp.append(token.decode('utf8'))
-                tokens = tmp
+
+                tokens = [token.decode('utf8') for token in tokens]
                 tagged = nltk.pos_tag(tokens)
                 result = cp.parse(tagged)
                 for i in range(len(result)):

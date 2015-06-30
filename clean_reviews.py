@@ -1,4 +1,4 @@
-output = 'C:/Users/Patrick/Downloads/spider_google_play/cleaned_out.txt'
+output = 'C:/Users/Patrick/Downloads/spider_google_play/out.txt'
 new_output = 'C:/Users/Patrick/Downloads/spider_google_play/clean_out.txt'
 words_to_remove = 'C:/Users/Patrick/Downloads/spider_google_play/to_remove.txt'
 
@@ -40,7 +40,7 @@ def remove(to_remove):
             except:
                 continue
 
-        old_line = ['great' if 'great' in phrase else phrase for phrase in old_line]
+        # old_line = ['great' if 'great' in phrase else phrase for phrase in old_line]
 
         clean_string = '\001'.join(old_line)
         if clean_string not in ['1\001', '2\001', '3\001', '4\001', '5\001', '1', '2', '3', '4', '5']:
